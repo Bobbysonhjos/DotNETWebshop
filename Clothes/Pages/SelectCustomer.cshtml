@@ -1,0 +1,32 @@
+﻿@page
+@model Clothes.Pages.SelectCustomerModel
+@{
+}
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">Select Customer</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model.Customers)
+        {
+            <tr>
+                <th scope="row">@customer.Id</th>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" asp-for="Id" value="@customer.Id" />
+                        <button asp-page-handler="Select" class="btn btn-primary">Select Customer</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

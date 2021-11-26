@@ -1,0 +1,57 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<form method="post" asp-page-handler="Search">
+    <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Search" asp-for="Search">
+        <div class="input-group-append">
+            <button type="submit" class="btn btn-primary" asp-page-handler="Search">Search</button>
+        </div>
+    </div>
+</form>
+<div class="dropdown indexDropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        Sort by
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li><a Style="color:black" asp-route-sortOrder="?sort=HigestPrice">Highest Price</a></li>
+        <li><a Style="color:black" asp-route-sortOrder="?sort=LowestPrice">Lowest Price</a></li>
+    </ul>
+</div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Add to Cart</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model.Products)
+        {
+            <tr>
+                <th scope="row">@product.Id</th>
+                <td>@product.Name</td>
+                <td>@product.Price</td>
+                <td>
+                    <form method="post">
+                        <input type="hidden" asp-for="Id" value="@product.Id" />
+                        <button asp-page-handler="Add" class="btn btn-primary">Add</button>
+                    </form>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

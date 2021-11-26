@@ -1,0 +1,41 @@
+﻿@page
+@model Clothes.Pages.ShoppingCartModel
+@{
+}
+<div class="text-center">
+    <h1 class="display-4">ShoppingCart</h1>
+</div>
+
+@if (Model.ShoppingCart is not null)
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Price</th>
+                <th scope="col">Add to Cart</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.ShoppingCart.Products)
+            {
+                <tr>
+                    <th scope="row">@product.Id</th>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                    <td>
+                        <form method="post">
+                            <input type="hidden" asp-for="Id" value="@product.Id" />
+                            <button asp-page-handler="Remove" class="btn btn-primary">Remove</button>
+                        </form>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <form method="post">
+        <button asp-page-handler="Checkout" class="btn btn-primary">Checkout</button>
+    </form>
+} 

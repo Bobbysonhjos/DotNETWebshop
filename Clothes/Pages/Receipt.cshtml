@@ -1,0 +1,31 @@
+﻿@page
+@model Clothes.Pages.ReceiptModel
+@{
+}
+    <div>
+        <h1 class="display-4">Reciept</h1>
+        <p>Date: @Model.Order.Receipt.PayDate</p>
+        <p>CardNO: @Model.Order.Receipt.Card.CardNumber</p>
+    </div>
+    <br />
+    <div class="container-fluid">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model.Order.Products)
+                {
+                    <tr>
+                        <th scope="row">@product.Name</th>
+                        <td>@product.Price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="d-flex flex-row align-items-center pull-right"><span class="mr-1">Total:</span><span class="mr-1">@Model.Order.GetTotalCost()</span></div>
+    </div>
+    
